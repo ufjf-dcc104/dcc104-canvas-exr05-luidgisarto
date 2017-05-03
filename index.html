@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>DCC 104 - Duelo</title>
+    <script src="sprite.js" charset="utf-8"></script>
+    <!--<script src="level.js" charset="utf-8"></script>-->
+    <script src="images.js" charset="utf-8"></script>
+</head>
+
+<body>
+    <h1>DCC 104 - Duelo</h1>
+    <canvas id="canvas" width="600" height="500"></canvas>
+
+
+</body>
+
+</html>
+
+<script>
+    var tela = document.getElementsByTagName("canvas")[0];
+    var ctx = canvas.getContext("2d");
+    var fps = 120;
+    var dt = 1/fps;
+    var goku = iniciarGoku();
+    var vegeta = iniciarVegeta();
+
+    desenha();
+
+    function desenha() {
+        requestAnimationFrame(desenha);
+        inicializar(ctx);
+        goku.mover(dt);
+        vegeta.mover(dt);
+        goku.desenhar(ctx);
+        vegeta.desenhar(ctx);
+        habilitarControles();
+    }
+
+    function inicializar(ctx) {
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "white";
+
+        //Desenha borda canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function iniciarGoku() {
+        return new Sprite(10,50,40,40, "blue");
+    }
+
+    function iniciarVegeta() {
+        return new Sprite(tela.width-50, tela.height-100, 40,40, "red");
+    }
+
+    function habilitarControles(nave) {
+        addEventListener("keydown", function (e) {
+            switch (e.keyCode) {
+                //PLAYER GOKU
+                case 32://ESPAÇO
+                    goku.atirar(nave);
+                    break;
+                case 65://A
+                    goku.vx -= 500;
+                    break;
+                case 68://D
+                    goku.vx += 500;
+                    break;
+                case 87: //W
+                    goku.vy -= 500;
+                    break;
+                case 83: //S
+                    goku.vy += 500;
+                    break;
+                
+                //PLAYER VEGETA
+                case 16://
+                    vegeta.atirar(nave);
+                    break;
+                case 37://SETA ESQUERDA 
+                    vegeta.vx -= 500;
+                    break;
+                case 39://SETA DIREITA
+                    vegeta.vx += 500;
+                    break;
+                case 38: //SETA CIMA
+                    vegeta.vy -= 500;
+                    break;
+                case 40: //SETA BAIXO
+                    vegeta.vy += 500;
+                    break;
+                default:
+            }
+        });
+
+        addEventListener("keyup", function (e) {
+            switch (e.keyCode) {
+               //PLAYER GOKU
+                case 32://ESPAÇO
+                    goku.atirar(nave);
+                    break;
+                case 65://A
+                    goku.vx = 0;
+                    break;
+                case 68://D
+                    goku.vx = 0;
+                    break;
+                case 87: //W
+                    goku.vy = 0;
+                    break;
+                case 83: //S
+                    goku.vy = 0;
+                    break;
+                
+                //PLAYER VEGETA
+                case 16://
+                    vegeta.atirar(nave);
+                    break;
+                case 37://SETA ESQUERDA 
+                    vegeta.vx = 0;
+                    break;
+                case 39://SETA DIREITA
+                    vegeta.vx = 0;
+                    break;
+                case 38: //SETA CIMA
+                    vegeta.vy = 0;
+                    break;
+                case 40: //SETA BAIXO
+                    vegeta.vy = 0;
+                    break;
+                default:
+
+            }
+        });
+    }
+
+</script>
