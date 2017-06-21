@@ -36,9 +36,9 @@
         inicializar(ctx);
         goku.mover(dt);
         vegeta.mover(dt);
-        goku.desenhar(ctx);       
+        goku.desenhar(ctx);
         vegeta.desenhar(ctx);
-        
+
         for (var i = 0; i < goku.tiros.length; i++) {
             var element = goku.tiros[i];
 
@@ -68,7 +68,7 @@
     function habilitarControles() {
         addEventListener("keypress", function(e){
             if(e.keyCode == 32){
-                goku.atirar(ctx, dt);                
+                goku.atirar(ctx, dt);
             }
         });
 
@@ -76,33 +76,35 @@
             switch (e.keyCode) {
                 //PLAYER GOKU
                 case 65://A
-                    goku.vx -= 500;
+                    goku.vx = -300;
+                    goku.dir = 1;
                     break;
                 case 68://D
-                    goku.vx += 500;
+                    goku.vx = +300;
+                    goku.dir = 3;
                     break;
                 case 87: //W
-                    goku.vy -= 500;
+                    goku.vy = -300;
                     break;
                 case 83: //S
-                    goku.vy += 500;
+                    goku.vy = +300;
                     break;
-                
+
                 //PLAYER VEGETA
                 case 16://
                     vegeta.atirar(ctx,dt);
                     break;
-                case 37://SETA ESQUERDA 
-                    vegeta.vx -= 500;
+                case 37://SETA ESQUERDA
+                    vegeta.vx = -300;
                     break;
                 case 39://SETA DIREITA
-                    vegeta.vx += 500;
+                    vegeta.vx = +300;
                     break;
                 case 38: //SETA CIMA
-                    vegeta.vy -= 500;
+                    vegeta.vy = -300;
                     break;
                 case 40: //SETA BAIXO
-                    vegeta.vy += 500;
+                    vegeta.vy = +300;
                     break;
                 default:
             }
@@ -113,9 +115,11 @@
                //PLAYER GOKU
                 case 65://A
                     goku.vx = 0;
+                    goku.dir = 1;
                     break;
                 case 68://D
                     goku.vx = 0;
+                    goku.dir = 3;
                     break;
                 case 87: //W
                     goku.vy = 0;
@@ -123,11 +127,11 @@
                 case 83: //S
                     goku.vy = 0;
                     break;
-                
+
                 //PLAYER VEGETA
                 case 16://
                     break;
-                case 37://SETA ESQUERDA 
+                case 37://SETA ESQUERDA
                     vegeta.vx = 0;
                     break;
                 case 39://SETA DIREITA

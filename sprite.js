@@ -19,18 +19,31 @@ Sprite.prototype.desenhar = function (ctx, img) {
 };
 
 Sprite.prototype.mover = function (dt) {
-  this.vx = this.vx * dt;
-  this.vy = this.vy * dt;
+  //this.vx = this.ax * dt;
+ // this.vy = this.ay * dt;
   this.x += this.vx * dt;
-  this.y += this.vy * dt;  
+  this.y += this.vy * dt;
+  this.cooldown -= dt;
 }
 
 Sprite.prototype.atirar = function (ctx, dt) {
+  if(this.cooldown>0) return;
+  this.cooldown = 0.2;
   var tiro = new Sprite();
-  tiro.x = this.x + 40;
-  tiro.y = this.y + 10;
-  tiro.vx = -400;
-  tiro.vy = 20;
+  tiro.x = this.x;
+  tiro.y = this.y;
+  switch (this.dir) {
+    case 1:
+      tiro.vx = -400;
+      tiro.vy = 0;
+      break;
+    case 3:
+      tiro.vx = 400;
+      tiro.vy = 0;
+      break;
+    default:
+
+  }
   tiro.w = 15;
   tiro.h = 15;
   tiro.color = "orange";
