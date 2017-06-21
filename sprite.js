@@ -16,6 +16,10 @@ Sprite.prototype.desenhar = function (ctx, img) {
   ctx.fillStyle = this.color;
   ctx.fillRect(this.x, this.y, this.w, this.h);
   ctx.strokeRect(this.x, this.y, this.w, this.h);
+
+  for (var i = 0; i < this.tiros.length; i++) {
+    this.tiros[i].desenhar(ctx, "tiro");
+  }
 };
 
 Sprite.prototype.mover = function (dt) {
@@ -24,9 +28,13 @@ Sprite.prototype.mover = function (dt) {
   this.x += this.vx * dt;
   this.y += this.vy * dt;
   this.cooldown -= dt;
+
+  for (var i = 0; i < this.tiros.length; i++) {
+    this.tiros[i].mover(dt);
+  }
 }
 
-Sprite.prototype.atirar = function (ctx, dt) {
+Sprite.prototype.atirar = function () {
   if(this.cooldown>0) return;
   this.cooldown = 0.2;
   var tiro = new Sprite();

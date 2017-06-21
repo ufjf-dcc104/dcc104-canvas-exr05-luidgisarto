@@ -27,7 +27,9 @@
     // var il = new ImageLoader();
     // il.inicializar();
     var goku = iniciarGoku();
+    goku.dir = 3;
     var vegeta = iniciarVegeta();
+    vegeta.dir = 1;
 
     desenha();
 
@@ -39,12 +41,7 @@
         goku.desenhar(ctx);
         vegeta.desenhar(ctx);
 
-        for (var i = 0; i < goku.tiros.length; i++) {
-            var element = goku.tiros[i];
 
-            element.mover(dt);
-            element.desenhar(ctx, "tiro");
-        }
         habilitarControles();
     }
 
@@ -68,7 +65,11 @@
     function habilitarControles() {
         addEventListener("keypress", function(e){
             if(e.keyCode == 32){
-                goku.atirar(ctx, dt);
+                goku.atirar();
+            }
+
+            if(e.keyCode == 13){
+                vegeta.atirar();
             }
         });
 
@@ -91,14 +92,13 @@
                     break;
 
                 //PLAYER VEGETA
-                case 16://
-                    vegeta.atirar(ctx,dt);
-                    break;
                 case 37://SETA ESQUERDA
                     vegeta.vx = -300;
+                    vegeta.dir = 1;
                     break;
                 case 39://SETA DIREITA
                     vegeta.vx = +300;
+                    vegeta.dir = 3;
                     break;
                 case 38: //SETA CIMA
                     vegeta.vy = -300;
