@@ -24,8 +24,8 @@
     var ctx = canvas.getContext("2d");
     var fps = 120;
     var dt = 1/fps;
-    // var il = new ImageLoader();
-    // il.inicializar();
+    var il = new ImageLoader();
+    il.inicializar();
     var goku = iniciarGoku();
     goku.dir = 3;
     var vegeta = iniciarVegeta();
@@ -38,9 +38,11 @@
         inicializar(ctx);
         goku.mover(dt);
         vegeta.mover(dt);
-        goku.desenhar(ctx);
-        vegeta.desenhar(ctx);
-
+        goku.desenhar(ctx, il.images["goku"]);
+        vegeta.desenhar(ctx, il.images["vegeta"]);
+        
+        goku.atinge(vegeta);
+        // vegeta.atinge(goku);
 
         habilitarControles();
     }
@@ -55,21 +57,21 @@
     }
 
     function iniciarGoku() {
-        return new Sprite(10,50,40,40, "blue");
+        return new Sprite(30,50,60,60);
     }
 
     function iniciarVegeta() {
-        return new Sprite(tela.width-50, tela.height-100, 40,40, "red");
+        return new Sprite(tela.width-50, tela.height-100, 60,60);
     }
 
     function habilitarControles() {
         addEventListener("keypress", function(e){
             if(e.keyCode == 32){
-                goku.atirar();
+                goku.atirar(il);
             }
 
             if(e.keyCode == 13){
-                vegeta.atirar();
+                vegeta.atirar(il);
             }
         });
 

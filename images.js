@@ -9,7 +9,7 @@ ImageLoader.prototype.load = function (key, imgURL) {
 };
 
 ImageLoader.prototype.inicializar = function (){
-    this.load("goku", "images/goku.png");
-    this.load("vegeta", "images/vegeta.jpg");
+    this.load("goku", "images/frente.png");
+    this.load("vegeta", "images/vegeta_voando.png");
     this.load("tiro", "images/tiro.png");
 }
